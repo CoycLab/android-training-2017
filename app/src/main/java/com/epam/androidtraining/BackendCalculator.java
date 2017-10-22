@@ -29,7 +29,9 @@ public class BackendCalculator implements ICalculator {
         final MyResponseListener listener = new MyResponseListener();
         new HttpClient().request(url, listener);
         if (listener.getThrowable() != null) {
-            //TODO implement error handling on UI
+
+            // TODO implement error handling on UI
+
             throw new UnsupportedOperationException(listener.getThrowable());
         }
         return String.valueOf(listener.getResult().getSum());

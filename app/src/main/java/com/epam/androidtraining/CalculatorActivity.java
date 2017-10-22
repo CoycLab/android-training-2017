@@ -69,12 +69,12 @@ public class CalculatorActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                /*int length = editable.length();
+                int length = editable.length();
                 if (length > 0) {
                     mCalculateButton.setEnabled(true);
                 } else {
                     mCalculateButton.setEnabled(false);
-                }*/
+                }
             }
         });
 

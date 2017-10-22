@@ -33,7 +33,7 @@ public class CalculatorServlet extends HttpServlet {
             result.setError(e.toString());
         }
 
-        //TODO what is faster?
+        // TODO what is faster?
 
         //1
         new Gson().toJson(result, pResponse.getWriter());

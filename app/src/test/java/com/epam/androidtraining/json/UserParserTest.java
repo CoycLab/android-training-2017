@@ -11,20 +11,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.io.InputStream;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
@@ -49,7 +46,7 @@ public class UserParserTest {
     private IHttpClient mHttpClient;
 
     @Captor
-    private ArgumentCaptor<HttpClient.ResponseListener> mResponseListenerArgumentCaptor;
+    ArgumentCaptor<HttpClient.ResponseListener> argumentCaptor;
 
     @Before
     public void setUp() {
@@ -69,8 +66,13 @@ public class UserParserTest {
     @Test
     public void parseUserListFromResource() throws Exception {
         InputStream mockedInputStream = Mocks.stream("user/user_list.json");
-//        mHttpClient.request(anyString(), mResponseListenerArgumentCaptor.capture());
-        mResponseListenerArgumentCaptor.getValue().onError(new Exception());
+        argumentCaptor = ArgumentCaptor.forClass(HttpClient.ResponseListener.class);
+        mHttpClient.request(anyString(), argumentCaptor.capture());
+        verify(mHttpClient, times(1)).request(anyString(), argumentCaptor.capture());
+
+        //TODO Understand @Captor usage
+
+//        argumentCaptor.getValue().onError(new Exception());
 
 //        final UsersListParserFactory usersListParserFactory = new UsersListParserFactory();
 //        final IUsersList userList = usersListParserFactory.createParser(response).parse();

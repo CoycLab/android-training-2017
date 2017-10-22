@@ -14,8 +14,8 @@ import static junit.framework.Assert.assertFalse;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
-    constants = BuildConfig.class,
-    sdk = Constants.SDK_VERSION
+        constants = BuildConfig.class,
+        sdk = Constants.SDK_VERSION
 )
 public class CalculatorActivityTest {
 
@@ -26,7 +26,6 @@ public class CalculatorActivityTest {
         activityController = Robolectric.buildActivity(CalculatorActivity.class);
         String input = "(1+3)/2)(";
 
-
     }
 
     @Test
@@ -35,13 +34,14 @@ public class CalculatorActivityTest {
         activityController.start();
         activityController.resume();
 
-
         CalculatorActivity calculatorActivity = activityController.get();
         boolean isCalculateButtonEnabled = calculatorActivity.findViewById(R.id.calculate_button).isEnabled();
         assertEquals(isCalculateButtonEnabled, false);
         assertFalse(isCalculateButtonEnabled);
 
         //TODO add additional checks
+
+
     }
 
     @After
